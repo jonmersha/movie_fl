@@ -10,36 +10,37 @@ class MovieListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
-    return GetBuilder<MovieServiceController>(builder: (movieController){
-
+    return GetBuilder<MovieServiceController>(builder: (movieController) {
       print(movieController.movieList);
-      return movieController.isLoaded?
-      ListView.builder(itemCount: movieController.movieList.length,
-        itemBuilder: (BuildContext context, int index)  {
-        return
-          InkWell(
-            onTap: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>  VideoPlayerScreen(videoUrl: '$BASE_URL${movieController.movieList[index]["video_url"]}'),
-                ),
-              );
-            },
-            child: MovieCard(
-              title: movieController.movieList[index]['titile'],
-              rating: movieController.movieList[index]["rating"].toDouble(),
-              likes: movieController.movieList[index]["likes_number"],
-              views: movieController.movieList[index]["view_number"],
-              subtitle: movieController.movieList[index]["movie_description"],
-              imageUrl: '$BASE_URL${movieController.movieList[index]['image_url']}',
-            ),
-          );
-  } ):const CircularProgressIndicator(
-        color: Colors.red,
-      );
+      return movieController.isLoaded
+          ? ListView.builder(
+              itemCount: movieController.movieList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => VideoPlayerScreen(
+                            videoUrl:
+                                '$BASE_URL${movieController.movieList[index].videoUrl}'),
+                      ),
+                    );
+                  },
+                  child: MovieCard(
+                    title: movieController.movieList[index].title!,
+                    rating:
+                        movieController.movieList[index].rating!.toDouble(),
+                    likes: movieController.movieList[index].likesNumber!,
+                    views: movieController.movieList[index].viewNumber!,
+                    subtitle: movieController.movieList[index].movieDescription!,
+                    imageUrl:
+                        '$BASE_URL${movieController.movieList[index].imageUrl}',
+                  ),
+                );
+              })
+          : const CircularProgressIndicator(
+              color: Colors.red,
+            );
     });
   }
 }
