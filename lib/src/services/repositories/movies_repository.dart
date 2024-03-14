@@ -8,4 +8,8 @@ class MovieRepo extends GetxService {
   Future<Response> getMovies() async {
     return await apIClient.getData(movies);
   }
+
+  Future<Response> getSubMovies(id) async {
+    return await apIClient.getData('$subMovies/$id');
+  }
 }

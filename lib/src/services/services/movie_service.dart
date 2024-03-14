@@ -10,7 +10,7 @@ class MovieService extends GetxService{
     return await apIClient.getData(movies);
   }
   Future<Response> getMovieSeries(int id) async {
-    return await apIClient.getData('$movieSeries/?id=$id');
+    return await apIClient.getData('$subMovies/?id=$id');
   }
 
 }

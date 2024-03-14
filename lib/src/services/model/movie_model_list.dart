@@ -1,6 +1,29 @@
 class MovieModel {
+  List<Data>? data;
+
+  MovieModel({this.data});
+
+  MovieModel.fromJson(Map<String, dynamic> json) {
+    if (json['Data'] != null) {
+      data = <Data>[];
+      json['Data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['Data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data {
   int? iD;
-  String? title;
+  String? titile;
   String? movieDescription;
   int? viewNumber;
   int? likesNumber;
@@ -9,20 +32,20 @@ class MovieModel {
   String? videoUrl;
   int? isSeries;
 
-  MovieModel(
+  Data(
       {this.iD,
-        this.title,
-        this.movieDescription,
-        this.viewNumber,
-        this.likesNumber,
-        this.rating,
-        this.imageUrl,
-        this.videoUrl,
-        this.isSeries});
+      this.titile,
+      this.movieDescription,
+      this.viewNumber,
+      this.likesNumber,
+      this.rating,
+      this.imageUrl,
+      this.videoUrl,
+      this.isSeries});
 
-  MovieModel.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     iD = json['ID'];
-    title = json['titile'];
+    titile = json['titile'];
     movieDescription = json['movie_description'];
     viewNumber = json['view_number'];
     likesNumber = json['likes_number'];
@@ -35,7 +58,7 @@ class MovieModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['ID'] = this.iD;
-    data['titile'] = this.title;
+    data['titile'] = this.titile;
     data['movie_description'] = this.movieDescription;
     data['view_number'] = this.viewNumber;
     data['likes_number'] = this.likesNumber;
