@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_flutter/src/services/controllers/movies_series.dart';
 import 'package:movie_flutter/src/utility/app_constants.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -15,9 +16,9 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  int playIndex=0;
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
-
   @override
   void initState() {
     super.initState();
@@ -48,19 +49,37 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           children: [
             FutureBuilder(
               future: _initializeVideoPlayerFuture,
+
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
+                    aspectRatio:_controller.value.aspectRatio,
+                    child: VideoPlayer(_controller,),
                   );
                 } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Container(
+                    color: Colors.black,
+                    constraints: BoxConstraints(
+                        minHeight: 100, minWidth: double.infinity, maxHeight: 200),
+                    child: const Center(
+
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 }
               },
             ),
+            ValueListenableBuilder(
+              valueListenable: _controller,
+              builder: (context, VideoPlayerValue value, child) {
+                //Do Something with the value.
+                return  Indicator(value.position.inMinutes.toDouble(),value.duration.inMinutes.toDouble());
+                  //Text(value.position.inMinutes.toString());
+              },
+            ),
+
+
+
             Expanded(
               child:
                   GetBuilder<SubMovieController>(builder: (subMovieController) {
@@ -69,7 +88,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         itemCount: subMovieController.movieSeriesList.length,
                         itemBuilder: (BuildContext context, index) {
                           return Container(
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             height: 140,
                             decoration: BoxDecoration(
@@ -88,33 +107,41 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                               '$BASE_URL${subMovieController.movieSeriesList[index].imageUrl!}'),
                                           fit: BoxFit.fill)),
                                 ),
+
                                 Expanded(
+                                  flex: 1,
                                   child: Column(
+
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                          '${subMovieController.movieSeriesList[index].movieDescription!}'),
-                                      Text('Likes')
+                                          '${subMovieController.movieSeriesList[index].movieDescription!}',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                                      Text('Season${subMovieController.movieSeriesList[index].season!}: Episode${subMovieController.movieSeriesList[index].epsode!}'),
+                                      Text('${_controller.value.position}'),
+
+
                                     ],
                                   ),
                                 ),
                                 InkWell(
                                   onTap: (){
                                     setState(() {
-                                      initialize('$BASE_URL${subMovieController.movieSeriesList[index].videoUrl!}');
+                                      if(index!=playIndex) initialize('$BASE_URL${subMovieController.movieSeriesList[index].videoUrl!}');
                                       if (_controller.value.isPlaying) {
                                         _controller.pause();
                                       } else {
                                         _controller.play();
                                       }
+                                      playIndex=index;
                                     });
 
                                   },
                                   child: Container(
                                     height: double.infinity,
                                     width: 50,
-                                  color: Colors.amber,
+                                  color: (index!=playIndex) ?Colors.grey.shade200:Colors.green,
                                     child: Icon(
-                                      _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,size: 60,
+                                      (index==playIndex) && _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,size: 30,
 
                                     ),),
                                 )
@@ -132,5 +159,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
       ),
     );
+  }
+
+  LinearPercentIndicator Indicator(value,duration) {
+    //var percent=
+    return LinearPercentIndicator(
+          //width: 140.0,
+          lineHeight: 14.0,
+          percent: value/duration,
+          backgroundColor: Colors.grey,
+          progressColor: Colors.blue,
+        );
   }
 }
