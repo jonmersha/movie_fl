@@ -8,7 +8,7 @@ class MovieCard extends StatelessWidget {
   final String subtitle;
   final String imageUrl;
 
-  MovieCard({
+  const MovieCard({super.key, 
     required this.title,
     required this.rating,
     required this.likes,
@@ -25,7 +25,7 @@ class MovieCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           //set border radius more than 50% of height and width to make circle
         ),
-      margin: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -60,9 +60,9 @@ class MovieCard extends StatelessWidget {
                   itemCount: 5,
                   itemSize: 20.0,
                   ratingWidget: RatingWidget(
-                    full: Icon(Icons.star, color: Colors.amber),
-                    half: Icon(Icons.star_half, color: Colors.amber),
-                    empty: Icon(Icons.star_border, color: Colors.amber),
+                    full: const Icon(Icons.star, color: Colors.amber),
+                    half: const Icon(Icons.star_half, color: Colors.amber),
+                    empty: const Icon(Icons.star_border, color: Colors.amber),
                   ),
                   onRatingUpdate: (value) {
                     // You can handle the rating update here if needed
@@ -70,12 +70,12 @@ class MovieCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.thumb_up),
-                    SizedBox(width: 4.0),
+                    const Icon(Icons.thumb_up),
+                    const SizedBox(width: 4.0),
                     Text('$likes'),
-                    SizedBox(width: 16.0),
-                    Icon(Icons.remove_red_eye),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 16.0),
+                    const Icon(Icons.remove_red_eye),
+                    const SizedBox(width: 4.0),
                     Text('$views'),
                   ],
                 ),

@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:movie_flutter/src/services/controllers/movies_series.dart';
-import 'package:movie_flutter/src/utility/app_constants.dart';
 import 'package:video_player/video_player.dart';
 
 class MoviePlayer extends StatefulWidget {

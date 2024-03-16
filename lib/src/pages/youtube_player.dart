@@ -14,9 +14,9 @@ class _UTBState extends State<UTB> {
   late YoutubePlayerController _controller;
   late PlayerState _playerState;
   late YoutubeMetaData _videoMetaData;
-  double _volume = 100;
-  bool _muted = false;
-  bool _isPlayerReady = false;
+  final double _volume = 100;
+  final bool _muted = false;
+  final bool _isPlayerReady = false;
 
   @override
   void initState() {
@@ -24,8 +24,8 @@ class _UTBState extends State<UTB> {
     print(' Video ID: ${widget.videoUrl}');
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: '${widget.videoUrl}',
-      flags: YoutubePlayerFlags(
+      initialVideoId: widget.videoUrl,
+      flags: const YoutubePlayerFlags(
         autoPlay: true,
         //mute: true,
       ),

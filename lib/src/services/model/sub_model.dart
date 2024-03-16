@@ -7,15 +7,15 @@ class SubModel {
     if (json['Sub'] != null) {
       sub = <Sub>[];
       json['Sub'].forEach((v) {
-        sub!.add(new Sub.fromJson(v));
+        sub!.add(Sub.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.sub != null) {
-      data['Sub'] = this.sub!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (sub != null) {
+      data['Sub'] = sub!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -53,15 +53,15 @@ class Sub {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ID'] = this.iD;
-    data['Parent_ID'] = this.parentID;
-    data['titile'] = this.titile;
-    data['movie_description'] = this.movieDescription;
-    data['image_url'] = this.imageUrl;
-    data['video_url'] = this.videoUrl;
-    data['epsode_'] = this.epsode;
-    data['season_'] = this.season;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ID'] = iD;
+    data['Parent_ID'] = parentID;
+    data['titile'] = titile;
+    data['movie_description'] = movieDescription;
+    data['image_url'] = imageUrl;
+    data['video_url'] = videoUrl;
+    data['epsode_'] = epsode;
+    data['season_'] = season;
     return data;
   }
 }

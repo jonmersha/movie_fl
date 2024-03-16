@@ -68,8 +68,8 @@ class MovieListView extends StatelessWidget {
                   );
                 }),
           )
-          : Center(
-            child: const CircularProgressIndicator(
+          : const Center(
+            child: CircularProgressIndicator(
                 color: Colors.green,
               ),
           );

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:movie_flutter/src/services/model/movie_model_list.dart';
 import 'package:movie_flutter/src/services/model/sub_model.dart';
 import 'package:movie_flutter/src/services/repositories/movies_repository.dart';
 

@@ -162,8 +162,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         ),
                       );
                     })
-                : Center(
-                  child: const CircularProgressIndicator(
+                : const Center(
+                  child: CircularProgressIndicator(
                       color: Colors.red,
                     ),
                 );

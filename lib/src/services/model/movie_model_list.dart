@@ -7,13 +7,13 @@ class MovieModel {
     if (json['Data'] != null) {
       data = <Data>[];
       json['Data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['Data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -56,16 +56,16 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ID'] = this.iD;
-    data['titile'] = this.titile;
-    data['movie_description'] = this.movieDescription;
-    data['view_number'] = this.viewNumber;
-    data['likes_number'] = this.likesNumber;
-    data['rating'] = this.rating;
-    data['image_url'] = this.imageUrl;
-    data['video_url'] = this.videoUrl;
-    data['is_series'] = this.isSeries;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ID'] = iD;
+    data['titile'] = titile;
+    data['movie_description'] = movieDescription;
+    data['view_number'] = viewNumber;
+    data['likes_number'] = likesNumber;
+    data['rating'] = rating;
+    data['image_url'] = imageUrl;
+    data['video_url'] = videoUrl;
+    data['is_series'] = isSeries;
     return data;
   }
 }
